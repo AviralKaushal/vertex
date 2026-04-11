@@ -10,3 +10,4 @@ client/node
 client/dist/
 backend/node_modules/
 client/node_modules/
+vertex_case_study.md
