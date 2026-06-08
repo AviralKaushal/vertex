@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS transfers (
   note                    TEXT,
   status                  TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed')),
   stripe_payment_intent   TEXT,
+  idempotency_key         TEXT NOT NULL UNIQUE,
   created_at              TIMESTAMPTZ DEFAULT NOW(),
   completed_at            TIMESTAMPTZ
 );
@@ -77,3 +78,4 @@ CREATE INDEX IF NOT EXISTS idx_transactions_account_id ON transactions(account_i
 CREATE INDEX IF NOT EXISTS idx_transactions_date ON transactions(date DESC);
 CREATE INDEX IF NOT EXISTS idx_plaid_items_user_id ON plaid_items(user_id);
 CREATE INDEX IF NOT EXISTS idx_transfers_user_id ON transfers(user_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_transfers_idempotency_key ON transfers(idempotency_key);

@@ -31,7 +31,7 @@ services:
       - DB_USER=${DB_USER:-postgres}
       - DB_HOST=postgres
       - DB_DATABASE=${DB_DATABASE:-postgres}
-      - DB_PASSWORD=${DB_PASSWORD:-Kaushal@123}
+      - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD env var is required}
       - DB_PORT=5432
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -58,7 +58,7 @@ services:
       - "5555:5432"
     environment:
       POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-Kaushal@123}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD env var is required}
       POSTGRES_DB: ${DB_DATABASE:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data
